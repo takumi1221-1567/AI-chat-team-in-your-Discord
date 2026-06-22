@@ -57,6 +57,22 @@ Then in Discord: type anything to chat, or `meeting <topic>` to start a discussi
 
 ---
 
+## 🤖 Or: hand it to Claude Code and let it build
+
+This repo ships a build brief (**[CLAUDE.md](CLAUDE.md)**) that an AI coding agent reads automatically.
+Clone the repo, open it in Claude Code, and paste:
+
+> *"Read CLAUDE.md and build this project. I want a team called **Aina** (calm, risk & discipline),
+> **Pal** (scheduling & coordination), and **X** (strategy) — Aina and Pal local, X is my API agent.
+> Ask me for the Discord token and X's endpoint when you reach those steps."*
+
+Claude will install deps, write `agents.yaml`, verify each teammate offline, and stop to ask you for the
+few things only you can provide (token, endpoints, keys). What it can't do is yours, listed in one place:
+**[docs/10-you-the-human.md](docs/10-you-the-human.md)**. The contract it builds against (and consults when
+fixing) is **[docs/00-spec.md](docs/00-spec.md)**.
+
+---
+
 ## Define your team (`agents.yaml`)
 
 ```yaml
@@ -93,6 +109,9 @@ reproduce it:
 
 | Step | Doc |
 |---|---|
+| Build brief for Claude Code | [CLAUDE.md](CLAUDE.md) |
+| Spec, invariants & troubleshooting | [docs/00-spec.md](docs/00-spec.md) |
+| What only you (the human) must do | [docs/10-you-the-human.md](docs/10-you-the-human.md) |
 | What you're building | [docs/01-concept.md](docs/01-concept.md) |
 | Discord bot: token, invite, intents | [docs/02-discord-setup.md](docs/02-discord-setup.md) |
 | Define your team | [docs/03-define-your-team.md](docs/03-define-your-team.md) |
