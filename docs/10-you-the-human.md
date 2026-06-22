@@ -42,8 +42,8 @@ Each `backend: http` teammate is **an agent you built and deployed yourself** �
 [04-api-agents.md](04-api-agents.md) (copy-paste Cloudflare Pages Function). You provide Claude Code with:
 - the **endpoint URL**, and
 - the **request/response field names** if they differ (e.g. `query` / `answer`), and
-- any **API key** the endpoint needs → put it in `.env` (e.g. `X_AGENT_TOKEN=...`) and reference it in
-  `agents.yaml` as `headers: { Authorization: "Bearer ${X_AGENT_TOKEN}" }`.
+- any **API key** the endpoint needs → put it in `.env` (e.g. `AGENT_TOKEN=...`) and reference it in
+  `agents.yaml` as `headers: { Authorization: "Bearer ${AGENT_TOKEN}" }`.
 > Don't have any yet? Start with all `backend: ollama` teammates — no endpoints needed.
 
 ### 5. Run it

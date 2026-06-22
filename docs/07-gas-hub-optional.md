@@ -2,7 +2,7 @@
 
 You don't need this to run the team. But if you want a **zero-infra web dashboard** and a free,
 always-on place to **log and read meeting transcripts**, a Google Apps Script (GAS) Web App is a handy
-companion. This is the pattern the original project (EAST) grew out of.
+companion. This is the pattern this template grew out of.
 
 ## What a GAS hub gives you
 

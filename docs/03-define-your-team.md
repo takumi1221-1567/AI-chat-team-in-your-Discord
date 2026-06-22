@@ -23,23 +23,23 @@ Everything about who is on the team lives in **`agents.yaml`** (copy it from
 
 ```yaml
 team:
-  - name: Aina
+  - name: Ada
     backend: ollama
     model: llama3
     angle: discipline, accountability, risk
-    persona: "You are Aina, a calm secretary AI. 1-3 sentences, no preamble."
+    persona: "You are Ada, a calm secretary AI. 1-3 sentences, no preamble."
 
-  - name: X
+  - name: Strat
     backend: http
-    endpoint: "https://my-strategist.example.com/api/chat"
+    endpoint: "https://your-agent.example.com/api/chat"
     request_key: message
     response_key: reply
     headers:
-      Authorization: "Bearer ${X_AGENT_TOKEN}"   # X_AGENT_TOKEN comes from .env
+      Authorization: "Bearer ${AGENT_TOKEN}"   # AGENT_TOKEN comes from .env
     angle: strategy, technology, risk assessment
 
 summarizer:
-  name: EAST
+  name: Chair
   backend: ollama
   model: llama3
 

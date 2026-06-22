@@ -10,13 +10,13 @@ and you have a running multi-agent room. No vendor lock-in, runs on your machine
 ```
 You: meeting How should we launch the new feature?
 
-🗣️ EAST   Meeting started — topic: How should we launch the new feature? · 3 rounds
-Aina      Lock the scope first and gate the rollout behind a staged release to limit risk.
-Pal       I'll line up the schedule: a one-week QA window, then a phased open to 10% of users.
-X         Strategically, ship the API behind a flag and measure error rates before widening.
-Rock      Let's not over-plan — pick a date, run a smoke test today, and commit to it!
+🗣️ Chair   Meeting started — topic: How should we launch the new feature? · 3 rounds
+Ada      Lock the scope first and gate the rollout behind a staged release to limit risk.
+Quill       I'll line up the schedule: a one-week QA window, then a phased open to 10% of users.
+Strat     Strategically, ship the API behind a flag and measure error rates before widening.
+Dash      Let's not over-plan — pick a date, run a smoke test today, and commit to it!
 …(2 more rounds)…
-📋 EAST   [Summary] • staged rollout • flag + metrics • fixed launch date  [Decisions] … [Next actions] …
+📋 Chair   [Summary] • staged rollout • flag + metrics • fixed launch date  [Decisions] … [Next actions] …
 ```
 
 ---
@@ -62,9 +62,9 @@ Then in Discord: type anything to chat, or `meeting <topic>` to start a discussi
 This repo ships a build brief (**[CLAUDE.md](CLAUDE.md)**) that an AI coding agent reads automatically.
 Clone the repo, open it in Claude Code, and paste:
 
-> *"Read CLAUDE.md and build this project. I want a team called **Aina** (calm, risk & discipline),
-> **Pal** (scheduling & coordination), and **X** (strategy) — Aina and Pal local, X is my API agent.
-> Ask me for the Discord token and X's endpoint when you reach those steps."*
+> *"Read CLAUDE.md and build this project. I want a team called **Ada** (calm, risk & discipline),
+> **Quill** (scheduling & coordination), and **Strat** (strategy) — Ada and Quill local, Strat is my API agent.
+> Ask me for the Discord token and Strat's endpoint when you reach those steps."*
 
 Claude will install deps, write `agents.yaml`, verify each teammate offline, and stop to ask you for the
 few things only you can provide (token, endpoints, keys). What it can't do is yours, listed in one place:
@@ -77,20 +77,20 @@ fixing) is **[docs/00-spec.md](docs/00-spec.md)**.
 
 ```yaml
 team:
-  - name: Aina                       # local model teammate
+  - name: Ada                       # local model teammate
     backend: ollama
     model: llama3
     angle: discipline and risk
-    persona: "You are Aina, a calm secretary AI. 1-3 sentences."
+    persona: "You are Ada, a calm secretary AI. 1-3 sentences."
 
-  - name: X                          # YOUR agent, exposed as an HTTP API
+  - name: Strat                          # YOUR agent, exposed as an HTTP API
     backend: http
     endpoint: "https://your-agent.example.com/api/chat"
     request_key: message             # body field for the user text
     response_key: reply              # JSON field to read back
     angle: strategy and judgement
 
-summarizer: { name: EAST, backend: ollama, model: llama3 }
+summarizer: { name: Chair, backend: ollama, model: llama3 }
 meeting:  { rounds: 3 }
 ```
 
@@ -123,7 +123,7 @@ reproduce it:
 | Reproduce from scratch | [docs/09-reproduce-from-scratch.md](docs/09-reproduce-from-scratch.md) |
 
 > **Building the individual agents** (each character's own design and deployment) is covered in a
-> companion portfolio project, **My agent**. This repo focuses on turning agents into a *team*.
+> companion guide on building a single agent. This repo focuses on turning agents into a *team*.
 
 Reusable, copy-pasteable **skills** for an AI coding assistant live in [`skills/`](skills/).
 

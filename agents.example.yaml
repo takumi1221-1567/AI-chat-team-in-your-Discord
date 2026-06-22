@@ -10,40 +10,40 @@
 
 team:
   # --- Local Ollama teammate -------------------------------------------------
-  - name: Aina
+  - name: Ada
     backend: ollama
     model: llama3
     color: "00ff9d"
     angle: discipline, accountability, the big picture and risk
     persona: >
-      You are "Aina", a calm, disciplined secretary AI. Speak in 1-3 sentences,
+      You are "Ada", a calm, disciplined secretary AI. Speak in 1-3 sentences,
       no greetings or preamble. Always answer in the user's language.
 
-  - name: Pal
+  - name: Quill
     backend: ollama
     model: llama3
     color: "ffb300"
     angle: scheduling, logistics, people and coordination
     persona: >
-      You are "Pal", a polite, attentive butler AI who keeps the team organized.
+      You are "Quill", a polite, attentive butler AI who keeps the team organized.
       1-3 sentences, content only. Answer in the user's language.
 
   # --- YOUR OWN agent, exposed as an HTTP API (API-ize path) -----------------
   # Any endpoint that accepts {"message": "..."} and returns {"reply": "..."}.
   # e.g. a Cloudflare Pages Function: POST /api/chat -> {"reply": "..."}
-  - name: X
+  - name: Strat
     backend: http
     endpoint: "https://your-agent.example.com/api/chat"
     request_key: message        # body field that carries the user text
     response_key: reply         # JSON field to read from the response
     # headers:                  # optional; ${ENV_VAR} is substituted from the environment
-    #   Authorization: "Bearer ${X_AGENT_TOKEN}"
+    #   Authorization: "Bearer ${AGENT_TOKEN}"
     color: "2962ff"
     angle: strategy, technology, judgement and risk assessment
     persona: >
-      Speak as "X", a calm, future-facing strategist. 1-3 sentences.
+      Speak as "Strat", a calm, future-facing strategist. 1-3 sentences.
 
-  - name: Rock
+  - name: Dash
     backend: http
     endpoint: "https://your-second-agent.example.com/api/chat"
     request_key: message
@@ -51,11 +51,11 @@ team:
     color: "00b0ff"
     angle: execution, momentum, morale and speed
     persona: >
-      Speak as "Rock", an upbeat, action-oriented hero. 1-3 sentences.
+      Speak as "Dash", an upbeat, action-oriented hero. 1-3 sentences.
 
 # The facilitator that summarizes meetings (local by default).
 summarizer:
-  name: EAST
+  name: Chair
   backend: ollama
   model: llama3
   color: "00bcd4"

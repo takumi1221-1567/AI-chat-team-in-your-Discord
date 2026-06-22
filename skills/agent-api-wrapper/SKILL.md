@@ -28,12 +28,12 @@ Equivalent in FastAPI/Express/Lambda is fine — just return `{"reply": "..."}`.
 
 ## Plug into a team (agents.yaml)
 ```yaml
-- name: X
+- name: Strat
   backend: http
-  endpoint: "https://x.example.workers.dev/api/chat"
+  endpoint: "https://agent.example.workers.dev/api/chat"
   request_key: message       # adapt to your API (e.g. "query")
   response_key: reply        # adapt to your API (e.g. "answer")
-  headers: { Authorization: "Bearer ${X_AGENT_TOKEN}" }   # ${VAR} from .env
+  headers: { Authorization: "Bearer ${AGENT_TOKEN}" }   # ${VAR} from .env
 ```
 
 ## Rules

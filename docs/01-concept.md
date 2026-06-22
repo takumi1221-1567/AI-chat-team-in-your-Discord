@@ -31,7 +31,7 @@ A small, opinionated framework for running **a team of AI agents inside a Discor
 ## What this repo is *not*
 
 It does not teach you how to build each individual agent (model choice, fine-tuning, deployment of one
-character). That belongs to the companion project **My agent**. Here, agents already exist — we make
+character). That belongs to a companion guide on building a single agent. Here, agents already exist — we make
 them a team.
 
 Next: **[02-discord-setup.md](02-discord-setup.md)**.

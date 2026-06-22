@@ -6,12 +6,12 @@ The whole journey, in order, so anyone can rebuild it. Each step links to the de
 
 ```
 build an agent  →  expose it as an API  →  assemble a team  →  run it in Discord  →  test
-   (My agent)         (this repo · 04)        (03)                (02 · 05)            (08)
+   (build one agent)         (this repo · 04)        (03)                (02 · 05)            (08)
 ```
 
 ### Step 0 — Build your agents
 Decide who is on the team and what each one is good at. Building each individual agent (its model,
-persona, deployment) is covered in the companion project **My agent**. For a first run you can skip
+persona, deployment) is covered in a companion guide on building a single agent. For a first run you can skip
 this and use local `ollama` teammates with just a `persona`.
 
 ### Step 1 — Expose each agent as an API (for `http` teammates)

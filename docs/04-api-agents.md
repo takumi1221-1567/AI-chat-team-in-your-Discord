@@ -31,7 +31,7 @@ export async function onRequest({ request, env }) {
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${env.GEMINI_API_KEY}`,
     { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: "You are X, a calm strategist. 1-3 sentences." }] },
+        systemInstruction: { parts: [{ text: "You are Strat, a calm strategist. 1-3 sentences." }] },
         contents: [{ role: "user", parts: [{ text: message }] }],
         generationConfig: { thinkingConfig: { thinkingBudget: 0 } },
       }) });
@@ -47,13 +47,13 @@ Any stack works (FastAPI, Express, a Worker, a Lambda) — return `{"reply": "..
 ## Wire it into the team
 
 ```yaml
-- name: X
+- name: Strat
   backend: http
-  endpoint: "https://x.your-domain.workers.dev/api/chat"
+  endpoint: "https://agent.example.workers.dev/api/chat"
   request_key: message      # change if your API expects e.g. "query"
   response_key: reply       # change if your API returns e.g. "answer"
   headers:
-    Authorization: "Bearer ${X_AGENT_TOKEN}"   # put X_AGENT_TOKEN in .env
+    Authorization: "Bearer ${AGENT_TOKEN}"   # put AGENT_TOKEN in .env
 ```
 
 ## Adapting to a different shape
