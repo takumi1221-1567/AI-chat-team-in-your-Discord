@@ -1,0 +1,16 @@
+# Secrets — never commit
+.env
+*.env
+!config.example.env
+agents.yaml          # your real team may reference private endpoints/tokens
+!agents.example.yaml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / logs
+.DS_Store
+*.log
