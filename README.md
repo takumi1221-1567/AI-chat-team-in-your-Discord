@@ -36,6 +36,36 @@ Most "AI agent" demos are a single bot answering a single prompt. Real work happ
 
 ---
 
+## How it's different
+
+There are excellent multi-agent frameworks. This one makes a specific, narrow bet:
+
+- **Backend mixing as a first-class feature.** A single team can run a local `ollama` model, *your* deployed
+  HTTP agent, and a Claude/Gemini-backed endpoint side by side — switch one teammate's backend by editing one
+  YAML field. No SDK rewrite.
+- **Discussion, not fan-out.** Agents take turns *in sequence*, each reading the prior turns and constrained to
+  a fixed **angle**, with an explicit "don't repeat" rule — so you get build-and-rebut, then a structured
+  facilitator summary. The anti-parrot mechanics are documented in
+  [docs/11-technical-deep-dive.md](docs/11-technical-deep-dive.md).
+- **Offline-capable & vendor-neutral.** All-`ollama` teams run with no cloud and no quota. MIT.
+- **Discord-native, 1-file config.** It lives where teams already talk; the whole team is one `agents.yaml`.
+
+| | this template | LangChain | AutoGen | CrewAI |
+|---|---|---|---|---|
+| Mix local + HTTP + hosted backends per agent | ✅ one YAML field | via code | ✅ | partial |
+| Runs fully offline (no cloud) | ✅ all-`ollama` | ❌ | partial | ❌ |
+| Turn-taking debate → summary, built in | ✅ | build it | ✅ | ✅ |
+| Discord as the interface | ✅ native | ❌ | ❌ | ❌ |
+| Setup to first meeting | minutes, 1 file | more involved | more involved | more involved |
+| License | MIT | MIT | MIT/CC | proprietary core |
+
+> Characteristics as of 2026 and necessarily simplified — these frameworks are broader and evolve. Use
+> LangChain/AutoGen/CrewAI for general-purpose or research-grade orchestration; use **this** when you want a
+> Discord-native, offline-capable team that mixes your own agents and reaches a decision. They're complementary —
+> an `http` teammate here can itself be a LangChain/AutoGen agent behind `POST {message} → {reply}`.
+
+---
+
 ## 60-second quick start
 
 ```bash
@@ -121,11 +151,69 @@ reproduce it:
 | Optional: a Google Apps Script hub | [docs/07-gas-hub-optional.md](docs/07-gas-hub-optional.md) |
 | Test the team | [docs/08-testing.md](docs/08-testing.md) |
 | Reproduce from scratch | [docs/09-reproduce-from-scratch.md](docs/09-reproduce-from-scratch.md) |
+| **Technical deep dive** (meeting algorithm) | [docs/11-technical-deep-dive.md](docs/11-technical-deep-dive.md) |
+| **Scalability, cost & deployment** | [docs/12-scalability.md](docs/12-scalability.md) |
 
 > **Building the individual agents** (each character's own design and deployment) is covered in a
 > companion guide on building a single agent. This repo focuses on turning agents into a *team*.
 
 Reusable, copy-pasteable **skills** for an AI coding assistant live in [`skills/`](skills/).
+
+---
+
+## Example team setups
+
+These are **example configurations** to copy into `agents.yaml` — illustrative, not case studies.
+
+### Product launch decision
+A team that reaches a go/no-go with explicit trade-offs.
+```yaml
+team:
+  - name: Ada
+    backend: ollama
+    model: llama3
+    angle: "risk, compliance, what can go wrong"
+  - name: Quill
+    backend: ollama
+    model: llama3
+    angle: "scheduling and execution feasibility"
+  - name: Strat
+    backend: http
+    endpoint: "https://your-strategist.example.com/api/chat"
+    angle: "business strategy and differentiation"
+summarizer: { name: Chair, backend: ollama, model: llama3 }
+meeting: { rounds: 3 }
+```
+```
+You: meeting How should we launch the new feature?
+🗣️ Chair  Meeting started — topic: How should we launch the new feature? · 3 rounds
+Ada      Gate the rollout behind a staged release; lock scope first to limit risk.
+Quill    Plan a one-week QA window, then open to 10% of users before full release.
+Strat    Ship behind a flag and measure error rates before widening — protects the brand.
+…(more rounds)…
+📋 Chair  [Summary] staged rollout · flag + metrics · fixed date  [Decisions] … [Next actions] …
+```
+
+### Research-paper review
+Three reviewers with opposing mandates, then a synthesized verdict.
+```yaml
+team:
+  - name: Skeptic
+    backend: ollama
+    model: llama3
+    angle: "methodological weaknesses and threats to validity"
+  - name: Enthusiast
+    backend: ollama
+    model: llama3
+    angle: "novelty and what it unlocks"
+  - name: Methodologist
+    backend: http
+    endpoint: "https://your-agent.example.com/api/chat"
+    angle: "rigor, baselines, and reproducibility"
+summarizer: { name: Chair, backend: ollama, model: llama3 }
+meeting: { rounds: 2 }
+```
+Paste the abstract as the topic (`meeting <abstract>`) to get strengths, weaknesses, and a verdict.
 
 ---
 
